@@ -1,7 +1,9 @@
+'use client'
+
 import { useState, useEffect, useCallback } from 'react'
 import { Table, Button, Input, Space, Modal, Form, Popconfirm, message, Card } from 'antd'
 import { PlusOutlined, SearchOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
-import { listUsers, createUser, updateUser, deleteUser, type User, type UserQuery } from '@/api/user'
+import { listUsers, createUser, updateUser, deleteUser, type User, type UserQuery } from '@/lib/api/user'
 import type { ColumnsType } from 'antd/es/table'
 
 export default function UserListPage() {

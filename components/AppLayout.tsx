@@ -1,4 +1,6 @@
-import { Outlet, useNavigate, useLocation } from 'react-router-dom'
+'use client'
+
+import { useRouter, usePathname } from 'next/navigation'
 import { Layout, Menu } from 'antd'
 import { HomeOutlined, UserOutlined } from '@ant-design/icons'
 
@@ -9,9 +11,9 @@ const menuItems = [
   { key: '/users', icon: <UserOutlined />, label: '用户管理' },
 ]
 
-export default function AppLayout() {
-  const navigate = useNavigate()
-  const location = useLocation()
+export default function AppLayout({ children }: { children: React.ReactNode }) {
+  const router = useRouter()
+  const pathname = usePathname()
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -22,14 +24,14 @@ export default function AppLayout() {
         <Menu
           theme="dark"
           mode="horizontal"
-          selectedKeys={[location.pathname]}
+          selectedKeys={[pathname]}
           items={menuItems}
-          onClick={({ key }) => navigate(key)}
+          onClick={({ key }) => router.push(key)}
           style={{ flex: 1 }}
         />
       </Header>
       <Content style={{ padding: 24, background: '#f5f5f5' }}>
-        <Outlet />
+        {children}
       </Content>
     </Layout>
   )
